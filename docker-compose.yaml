@@ -11,6 +11,8 @@ services:
       PHP_INI_XDEBUG__REMOTE_AUTOSTART: 1
       PHP_INI_XDEBUG__REMOTE_enable: 1
       APACHE_DOCUMENT_ROOT: public
+    links:
+      - "database"
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8080"]
       interval: 1m30s
