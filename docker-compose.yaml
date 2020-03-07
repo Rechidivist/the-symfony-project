@@ -1,0 +1,14 @@
+version: "3"
+services:
+  webapp:
+    image: thecodingmachine/php:7.2-v2-apache
+    ports:
+      - "80:8080"
+    volumes: 
+      - './app_data/web:/var/www/html'
+  database:
+    image: mysql:8
+    volumes: 
+      - './app_data/database:/var/lib/mysql/data'
+    environment:
+      MYSQL_ROOT_PASSWORD: i0mr11tмTfuker
