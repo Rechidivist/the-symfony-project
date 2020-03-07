@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * SchedulingGroups
  *
- * @ORM\Table(name="Scheduling_Groups")
+ * @ORM\Table(name="Scheduling_Groups", indexes={@ORM\Index(name="FK_Scheduling_Groups_Groups", columns={"id_Group"}), @ORM\Index(name="FK_Scheduling_Groups_Scheduling", columns={"id_Scheduling"})})
  * @ORM\Entity
  */
 class SchedulingGroups
@@ -22,16 +22,22 @@ class SchedulingGroups
     private $id;
 
     /**
-     * @var int|null
+     * @var \Groups
      *
-     * @ORM\Column(name="id_Group", type="integer", nullable=true)
+     * @ORM\ManyToOne(targetEntity="Groups")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_Group", referencedColumnName="id")
+     * })
      */
     private $idGroup;
 
     /**
-     * @var int|null
+     * @var \Scheduling
      *
-     * @ORM\Column(name="id_Scheduling", type="integer", nullable=true)
+     * @ORM\ManyToOne(targetEntity="Scheduling")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_Scheduling", referencedColumnName="id")
+     * })
      */
     private $idScheduling;
 

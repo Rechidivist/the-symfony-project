@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Consuming
  *
- * @ORM\Table(name="Consuming")
+ * @ORM\Table(name="Consuming", indexes={@ORM\Index(name="FK_Consuming_Lamps", columns={"id_lamp"})})
  * @ORM\Entity
  */
 class Consuming
@@ -24,13 +24,6 @@ class Consuming
     /**
      * @var int|null
      *
-     * @ORM\Column(name="id_lamp", type="integer", nullable=true)
-     */
-    private $idLamp;
-
-    /**
-     * @var int|null
-     *
      * @ORM\Column(name="value", type="integer", nullable=true)
      */
     private $value;
@@ -41,6 +34,16 @@ class Consuming
      * @ORM\Column(name="date", type="datetime", nullable=true)
      */
     private $date;
+
+    /**
+     * @var \Lamps
+     *
+     * @ORM\ManyToOne(targetEntity="Lamps")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_lamp", referencedColumnName="id")
+     * })
+     */
+    private $idLamp;
 
 
 }
