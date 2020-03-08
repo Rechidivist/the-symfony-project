@@ -24,14 +24,14 @@ class Lamps
     /**
      * @var int|null
      *
-     * @ORM\Column(name="position_x", type="integer", nullable=true)
+     * @ORM\Column(name="position_x", type="float", nullable=true)
      */
     private $position_x;
 
         /**
      * @var int|null
      *
-     * @ORM\Column(name="position_y", type="integer", nullable=true)
+     * @ORM\Column(name="position_y", type="float", nullable=true)
      */
     private $position_y;
 
