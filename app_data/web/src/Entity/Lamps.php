@@ -22,14 +22,14 @@ class Lamps
     private $id;
 
     /**
-     * @var int|null
+     * @var float|null
      *
      * @ORM\Column(name="position_x", type="float", nullable=true)
      */
     private $position_x;
 
         /**
-     * @var int|null
+     * @var float|null
      *
      * @ORM\Column(name="position_y", type="float", nullable=true)
      */
@@ -58,24 +58,24 @@ class Lamps
         return $this->id;
     }
 
-    public function getPositionX(): ?int
+    public function getPositionX(): ?float
     {
         return $this->position_x;
     }
 
-    public function setPositionX(?int $position_x): self
+    public function setPositionX(?float $position_x): self
     {
         $this->position_x = $position_x;
 
         return $this;
     }
 
-    public function getPositionY(): ?int
+    public function getPositionY(): ?float
     {
         return $this->position_y;
     }
 
-    public function setPositionY(?int $position_y): self
+    public function setPositionY(?float $position_y): self
     {
         $this->position_y = $position_y;
 
