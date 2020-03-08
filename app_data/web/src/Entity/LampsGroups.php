@@ -41,5 +41,34 @@ class LampsGroups
      */
     private $idLamp;
 
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    public function getIdGroup(): ?Groups
+    {
+        return $this->idGroup;
+    }
+
+    public function setIdGroup(?Groups $idGroup): self
+    {
+        $this->idGroup = $idGroup;
+
+        return $this;
+    }
+
+    public function getIdLamp(): ?Lamps
+    {
+        return $this->idLamp;
+    }
+
+    public function setIdLamp(?Lamps $idLamp): self
+    {
+        $this->idLamp = $idLamp;
+
+        return $this;
+    }
+
 
 }

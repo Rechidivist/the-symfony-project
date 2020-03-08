@@ -22,11 +22,19 @@ class Lamps
     private $id;
 
     /**
-     * @var string|null
+     * @var int|null
      *
-     * @ORM\Column(name="position", type="text", length=65535, nullable=true)
+     * @ORM\Column(name="position_x", type="integer", nullable=true)
      */
-    private $position;
+    private $position_x;
+
+        /**
+     * @var int|null
+     *
+     * @ORM\Column(name="position_y", type="integer", nullable=true)
+     */
+    private $position_y;
+
 
     /**
      * @ORM\Column(type="integer")
@@ -41,6 +49,35 @@ class Lamps
     public function setGate(int $gate): self
     {
         $this->gate = $gate;
+
+        return $this;
+    }
+
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    public function getPositionX(): ?int
+    {
+        return $this->position_x;
+    }
+
+    public function setPositionX(?int $position_x): self
+    {
+        $this->position_x = $position_x;
+
+        return $this;
+    }
+
+    public function getPositionY(): ?int
+    {
+        return $this->position_y;
+    }
+
+    public function setPositionY(?int $position_y): self
+    {
+        $this->position_y = $position_y;
 
         return $this;
     }

@@ -45,5 +45,46 @@ class Consuming
      */
     private $idLamp;
 
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    public function getValue(): ?int
+    {
+        return $this->value;
+    }
+
+    public function setValue(?int $value): self
+    {
+        $this->value = $value;
+
+        return $this;
+    }
+
+    public function getDate(): ?\DateTimeInterface
+    {
+        return $this->date;
+    }
+
+    public function setDate(?\DateTimeInterface $date): self
+    {
+        $this->date = $date;
+
+        return $this;
+    }
+
+    public function getIdLamp(): ?Lamps
+    {
+        return $this->idLamp;
+    }
+
+    public function setIdLamp(?Lamps $idLamp): self
+    {
+        $this->idLamp = $idLamp;
+
+        return $this;
+    }
+
 
 }

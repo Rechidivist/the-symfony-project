@@ -28,5 +28,22 @@ class Groups
      */
     private $name;
 
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    public function getName(): ?int
+    {
+        return $this->name;
+    }
+
+    public function setName(?int $name): self
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
 
 }

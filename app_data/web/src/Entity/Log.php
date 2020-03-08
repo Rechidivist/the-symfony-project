@@ -42,5 +42,46 @@ class Log
      */
     private $time;
 
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    public function getEventName(): ?string
+    {
+        return $this->eventName;
+    }
+
+    public function setEventName(?string $eventName): self
+    {
+        $this->eventName = $eventName;
+
+        return $this;
+    }
+
+    public function getMessage(): ?string
+    {
+        return $this->message;
+    }
+
+    public function setMessage(?string $message): self
+    {
+        $this->message = $message;
+
+        return $this;
+    }
+
+    public function getTime(): ?\DateTimeInterface
+    {
+        return $this->time;
+    }
+
+    public function setTime(?\DateTimeInterface $time): self
+    {
+        $this->time = $time;
+
+        return $this;
+    }
+
 
 }

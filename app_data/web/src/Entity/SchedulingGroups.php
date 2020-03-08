@@ -41,5 +41,34 @@ class SchedulingGroups
      */
     private $idScheduling;
 
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    public function getIdGroup(): ?Groups
+    {
+        return $this->idGroup;
+    }
+
+    public function setIdGroup(?Groups $idGroup): self
+    {
+        $this->idGroup = $idGroup;
+
+        return $this;
+    }
+
+    public function getIdScheduling(): ?Scheduling
+    {
+        return $this->idScheduling;
+    }
+
+    public function setIdScheduling(?Scheduling $idScheduling): self
+    {
+        $this->idScheduling = $idScheduling;
+
+        return $this;
+    }
+
 
 }

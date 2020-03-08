@@ -41,5 +41,34 @@ class SchedulingLamps
      */
     private $idScheduling;
 
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    public function getIdLamp(): ?Lamps
+    {
+        return $this->idLamp;
+    }
+
+    public function setIdLamp(?Lamps $idLamp): self
+    {
+        $this->idLamp = $idLamp;
+
+        return $this;
+    }
+
+    public function getIdScheduling(): ?Scheduling
+    {
+        return $this->idScheduling;
+    }
+
+    public function setIdScheduling(?Scheduling $idScheduling): self
+    {
+        $this->idScheduling = $idScheduling;
+
+        return $this;
+    }
+
 
 }
