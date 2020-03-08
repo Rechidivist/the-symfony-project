@@ -28,5 +28,22 @@ class Lamps
      */
     private $position;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $gate;
+
+    public function getGate(): ?int
+    {
+        return $this->gate;
+    }
+
+    public function setGate(int $gate): self
+    {
+        $this->gate = $gate;
+
+        return $this;
+    }
+
 
 }
