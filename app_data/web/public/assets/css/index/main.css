@@ -1,0 +1,28 @@
+#map{
+    position:absolute;
+    left: 0%;
+    top: 0%;
+    width: 65%;
+    height: 100%;
+}
+
+#menu{
+    position:absolute;
+    right: 0px;
+    top: 0%;
+    width: 33%;
+    height: 90%;
+    margin: 5px;
+}
+
+#baloon ul {
+    list-style-type: none;
+    padding: 20px;
+    margin: 0;
+}
+
+#layout ul {
+    list-style-type: none;
+    padding: 20px;
+    margin: 0;
+}

@@ -6,7 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Response;
 
-class LampsController extends AbstractController
+class AllLampsInfoController extends AbstractController
 {
     /**
      * @Route("/AllLampsForMap.json", name="AllLampsForMap")
@@ -18,8 +18,8 @@ class LampsController extends AbstractController
         foreach($AllLamps as $lamp){
             $mask['type'] = "FeatureCollection";
             $mask['features'][] =  array(
+                "id"=> $lamp->GetID(),
                 "type"=>"Feature",
-                "id"=> intval($lamp->GetID()),
                 "geometry" => array (
                       "type" => "Point",
                       "coordinates" => [floatval($lamp->getPositionX()), floatval($lamp->getPositionY())]
@@ -34,11 +34,13 @@ class LampsController extends AbstractController
                 "properties" => array (
                        "iconContent" => "Л".$lamp->GetID(),
                        "power"=> $lamp->GetPower(),
-                       "brightness"=>  $lamp->GetBrightness()
+                       "brightness"=>  $lamp->GetBrightness(),
+                       "lamp_id"=> $lamp->GetID()
+                       //"group"=> $lamp->GetGroup()
                  )
             );
         }  
-        $response = new Response (\json_encode($mask,JSON_UNESCAPED_UNICODE));
+        $response = new Response (\json_encode($mask));
 
         return $response;
     }
