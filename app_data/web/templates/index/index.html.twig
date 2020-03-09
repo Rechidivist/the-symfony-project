@@ -1,20 +1,114 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Hello IndexController!{% endblock %}
-
 {% block body %}
+<h1>Hello {{ controller_name }}! ✅</h1>
+
+<div id="map" style="width: 1000px; height: 600px"></div>
+
+
+
+{% endblock %}
+
+{% block stylesheets %}
 <style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+        
+        #baloon ul {
+            list-style-type: none;
+            padding: 20px;
+            margin: 0;
+        }
+
+        #layout ul {
+            list-style-type: none;
+            padding: 20px;
+            margin: 0;
+        }
 </style>
+{% endblock %}
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+{% block javascripts %}
+    <script src="https://api-maps.yandex.ru/2.1/?apikey=f76aeeaf-a382-46ed-b7f2-4927d286276c&lang=ru_RU&mode=debug" type="text/javascript"></script>
+    {% verbatim %}
+    <script>
+        let baloonHtml = ' \
+        <div id="baloon"> \
+        <div id="layout"> \
+            <ul id="menu_list"> \
+                <li> \
+                <li>Питание:   \
+                    <nobr> \
+                        <input type="radio" id="on" name="power" value="on" {% if properties.power == 1 %}checked{% endif %}> \
+                        <label for="on">Вкл</label> \
+                        <input type="radio" id="off" name="power" value="off" {% if properties.power == 0 %}checked{% endif %}> \
+                        <label for="off">Выкл</label> \
+                    </nobr> \
+                </li>  \
+                <li>Свет:  <input type="range" min="0" max="100" step="1" value="{{ properties.brightness }}" list="tickmarks"> </li> \
+                    <datalist id="tickmarks">  \
+                        <option value="0" label="0%"> \
+                        <option value="10"> \
+                        <option value="20"> \
+                        <option value="30"> \
+                        <option value="40"> \
+                        <option value="50" label="50%"> \
+                        <option value="60"> \
+                        <option value="70"> \
+                        <option value="80"> \
+                        <option value="90"> \
+                        <option value="100" label="100%"> \
+                    </datalist> \
+                <li><input type="submit" value="Отправить" /></li> \
+            </ul> \
+        </div> \
+    </div> \
+        '
+</script>
+{% endverbatim %}
+    <script type="text/javascript">
+        ymaps.ready(init);
+        let myMap;
+        let objectManager;
+        let baloonLayoutClass;
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ '/var/www/html/src/Controller/IndexController.php'|file_link(0) }}">src/Controller/IndexController.php</a></code></li>
-        <li>Your template at <code><a href="{{ '/var/www/html/templates/index/index.html.twig'|file_link(0) }}">templates/index/index.html.twig</a></code></li>
-    </ul>
-</div>
+        function init () {
+            // Создаем карту.
+            myMap = new ymaps.Map("map", {
+                    center: [47.60, 41.8],
+                    zoom: 9
+                }, {
+                    searchControlProvider: 'yandex#search'
+                });
+
+            // Создаем метку.
+            var myPlacemark = new ymaps.Placemark([47.60, 42.10], {
+                iconContent: 'Л1'
+            }, {
+                // Красная иконка, растягивающаяся под содержимое.
+                preset: "islands#redStretchyIcon"
+            });
+
+            baloonLayoutClass = ymaps.templateLayoutFactory.createClass(baloonHtml);
+            ymaps.layout.storage.add('my#baloonLayoutClass', baloonLayoutClass);
+
+            objectManager = new ymaps.ObjectManager({
+                // Включаем кластеризацию.
+                clusterize: true,
+                // Опции кластеров задаются с префиксом 'cluster'.
+                gridSize: 32,
+                clusterDisableClickZoom: true,
+                geoObjectOpenBalloonOnClick: true
+            });
+
+            $.ajax({
+                url: "AllLampsForMap.json"
+            }).done(function(data) {
+                objectManager.add(data);
+                myMap.setBounds(objectManager.getBounds());
+            });
+
+            myMap.geoObjects.add(objectManager);
+        }
+
+    </script>
 {% endblock %}

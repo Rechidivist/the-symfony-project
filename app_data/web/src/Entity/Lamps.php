@@ -28,7 +28,7 @@ class Lamps
      */
     private $position_x;
 
-        /**
+    /**
      * @var float|null
      *
      * @ORM\Column(name="position_y", type="float", nullable=true)
@@ -40,6 +40,16 @@ class Lamps
      * @ORM\Column(type="integer")
      */
     private $gate;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $power;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $brightness;
 
     public function getGate(): ?int
     {
@@ -78,6 +88,30 @@ class Lamps
     public function setPositionY(?float $position_y): self
     {
         $this->position_y = $position_y;
+
+        return $this;
+    }
+
+    public function getPower(): ?bool
+    {
+        return $this->power;
+    }
+
+    public function setPower(bool $power): self
+    {
+        $this->power = $power;
+
+        return $this;
+    }
+
+    public function getBrightness(): ?int
+    {
+        return $this->brightness;
+    }
+
+    public function setBrightness(int $brightness): self
+    {
+        $this->brightness = $brightness;
 
         return $this;
     }
