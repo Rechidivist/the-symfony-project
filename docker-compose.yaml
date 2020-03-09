@@ -11,7 +11,6 @@ services:
     environment:
       PHP_EXTENSION_XDEBUG: 1
       PHP_INI_XDEBUG__REMOTE_AUTOSTART: 1
-      PHP_INI_XDEBUG__REMOTE_enable: 1
       APACHE_DOCUMENT_ROOT: public
     links:
       - "database"
