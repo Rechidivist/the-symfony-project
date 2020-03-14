@@ -1,0 +1,5 @@
+FROM thecodingmachine/php:7.2-v2-apache
+RUN sudo apt update  \
+    && sudo apt install zlib1g-dev libicu-dev g++ \
+    && sudo -E docker-php-ext-configure sockets \
+    && sudo -E docker-php-ext-install sockets intl
