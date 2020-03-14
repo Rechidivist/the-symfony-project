@@ -6,9 +6,14 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
+use App\Service\RabbitControll;
 
 class LampsMindController extends AbstractController
 {
+
+    public function __construct()
+    {
+    }
     /**
      * @Route("/lamp/force_refresh", name="LampForceRefresh")
      */
@@ -49,9 +54,10 @@ class LampsMindController extends AbstractController
     /**
      * @Route("/lamp/{id}/power/set/{do}", requirements={"do" = "on|off" }, name="LampSetPower")
      */
-    public function SetPower(int $id,string $do)
+    public function SetPower(int $id,string $do,RabbitControll $rabbitMessager)
     {
-        return new Response($message,501);
+        $rabbitMessager->Send();
+        return new Response("",200);
     }
 
     /**
