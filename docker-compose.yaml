@@ -34,3 +34,10 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: i0mr11tмTfuker
     restart: unless-stopped
+    
+  rabbit:
+    image: rabbitmq:3.8-management
+    ports:
+    - "5627:5672"
+    - "15672:15672"
+
