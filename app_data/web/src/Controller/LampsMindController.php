@@ -67,7 +67,7 @@ class LampsMindController extends AbstractController
             $responseMsg = "brightness should be between 100 and 0";
             return new Response($responseMsg,400);
         }
-
+        
         $message = "req;$id:1;set:brightness:$brightness";
         $this->udp->publish($message);
 
@@ -80,5 +80,16 @@ class LampsMindController extends AbstractController
     public function GetBrightness()
     {
         return new Response($message,501);
+    }
+
+    /**
+     * @Route("/lamp/ping", name="LampPing")
+     */
+    public function Ping()
+    {
+        $this->tcp->addRequest("Ping","tcp","tcp");
+        $replies = $this->tcp->getReplies();
+        die(var_dump($replies));
+        return new Response(implode(";",$replies),501);
     }
 }
