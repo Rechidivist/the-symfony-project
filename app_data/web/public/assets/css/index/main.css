@@ -17,7 +17,6 @@
 
 #baloon ul {
     list-style-type: none;
-    padding: 20px;
     margin: 0;
 }
 
@@ -25,4 +24,22 @@
     list-style-type: none;
     padding: 20px;
     margin: 0;
+}
+
+datalist {
+    width: 100%;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+}
+
+datalist option {
+    -webkit-box-flex: 1;
+    -webkit-flex-grow: 1;
+        -ms-flex-positive: 1;
+            flex-grow: 1;
+    -webkit-flex-basis: 0;
+        -ms-flex-preferred-size: 0;
+            flex-basis: 0;
 }
