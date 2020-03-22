@@ -2,17 +2,22 @@
 
 namespace App\Controller;
 
+use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
-use App\Service\RabbitControll;
 
 class LampsMindController extends AbstractController
 {
+    
+    private $udp;
+    private $tcp;
 
-    public function __construct()
+    public function __construct(ContainerInterface $container)
     {
+        $this->udp = $container->get('old_sound_rabbit_mq.udp_request_producer');
+        $this->tcp = $container->get('old_sound_rabbit_mq.tcp_request_rpc');
     }
     /**
      * @Route("/lamp/force_refresh", name="LampForceRefresh")
@@ -52,35 +57,21 @@ class LampsMindController extends AbstractController
     }
 
     /**
-     * @Route("/lamp/{id}/power/set/{do}", requirements={"do" = "on|off" }, name="LampSetPower")
-     */
-    public function SetPower(int $id,string $do,RabbitControll $rabbitMessager)
-    {
-        $rabbitMessager->Send();
-        return new Response("",200);
-    }
-
-    /**
-     * @Route("/lamp/{id}/power/get", name="LampGetPower")
-     */
-    public function GetPower(int $id)
-    {
-        return new Response($message,501);
-    }
-
-    /**
      * @Route("/lamp/{id}/brightness/set/{brightness}", name="LampSetBrightness")
      */
     public function SetBrightness(int $id,int $brightness)
     {
-        $message = "";
+        $responseMsg = "";
 
         if($brightness < 0 || $brightness > 100){
-            $message = "brightness should be between 100 and 0";
-            return new Response($message,400);
+            $responseMsg = "brightness should be between 100 and 0";
+            return new Response($responseMsg,400);
         }
 
-        return new Response($message,200);
+        $message = "req;$id:1;set:brightness:$brightness";
+        $this->udp->publish($message);
+
+        return new Response();
     }
 
     /**
