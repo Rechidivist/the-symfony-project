@@ -17,10 +17,12 @@ services:
       STARTUP_COMMAND_1: sudo composer install
     links:
       - "database"
+    depends_on: 
+      - "rabbit"
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8080"]
       interval: 1m30s
-      timeout: 10s
+      timeout: 30s
       retries: 3
     restart: unless-stopped
 
@@ -40,4 +42,5 @@ services:
     ports:
     - "5627:5672"
     - "15672:15672"
+    restart: unless-stopped
 
